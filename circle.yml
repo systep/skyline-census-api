@@ -1,0 +1,18 @@
+machine:
+  timezone: Asia/Jerusalem
+  node:
+    version: 4.0.0
+
+general:
+  branches:
+    only:
+     - master # list of branches to build    
+
+dependencies:
+  override:
+    - npm install -g swagger
+    - npm install
+
+test:
+  override:
+    - npm test
