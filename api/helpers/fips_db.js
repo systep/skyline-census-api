@@ -33,12 +33,16 @@ module.exports = (function () {
             });
             return deferred.promise;
         },
-        isReady: function() {
+        isReady: function () {
             return Object.keys(db).length > 0;
         },
         getCityCode: function (shortStateName, fullCityName) {
             console.log(db[shortStateName]);
-            return db[shortStateName][fullCityName];
+            try {
+                return db[shortStateName][fullCityName];
+            } catch (ex) {
+                return ex.message;
+            }
         }
     }
 })();
