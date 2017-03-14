@@ -1,12 +1,15 @@
 {
-  "name": "scrapers",
+  "name": "skyline-census-api",
   "version": "0.0.1",
   "private": true,
-  "description": "New Swagger API Project",
+  "description": "",
   "keywords": [],
   "author": "",
   "license": "",
   "main": "app.js",
+  "engines": {
+    "node": "6.9.4"
+  },
   "dependencies": {
     "cheerio": "^0.22.0",
     "express": "^4.12.3",
