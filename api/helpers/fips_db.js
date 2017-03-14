@@ -11,7 +11,9 @@ module.exports = (function () {
     return {
         load: function () {
             var deferred = q.defer();
+            console.log('downloading fips db from ', fipsDBPath);
             request(fipsDBPath, function (err, response, body) {
+                console.log('fips db successfully downloaded.');
                 if (err) {
                     deferred.reject(err);
                     console.error(err);
@@ -39,11 +41,14 @@ module.exports = (function () {
             return Object.keys(db).length > 0;
         },
         getCityCode: function (shortStateName, fullCityName) {
-            console.log(db[shortStateName]);
+            if (!Object.keys(db).length) {
+                return;
+            }
             try {
                 return db[shortStateName][fullCityName];
             } catch (ex) {
-                return ex.message;
+                console.error(ex.message);
+                return;
             }
         }
     }
