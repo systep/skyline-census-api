@@ -2,20 +2,22 @@
 
 var fs = require('fs');
 var q = require('q');
+var request = require('request');
 
 module.exports = (function () {
-    var dbLoc = './db/fips.csv';
+    var fipsDBPath = process.env.FIPS_DB_URL;
     var db = {};
 
     return {
         load: function () {
             var deferred = q.defer();
-            fs.readFile(dbLoc, 'utf-8', function (err, data) {
+            request(fipsDBPath, function (err, response, body) {
                 if (err) {
                     deferred.reject(err);
                     console.error(err);
                     return;
                 }
+                var data = body.toString();
                 var s = data.split('\n');
                 for (var i = 1; i < s.length; i++) {
                     var l = s[i].split(',');
